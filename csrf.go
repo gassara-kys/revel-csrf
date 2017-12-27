@@ -21,7 +21,8 @@ var (
 	errNoReferer  = "REVEL_CSRF: A secure request contained no Referer or its value was malformed."
 	errBadReferer = "REVEL_CSRF: Same-origin policy failure."
 	errBadToken   = "REVEL_CSRF: tokens mismatch."
-	safeMethods   = regexp.MustCompile("^(GET|HEAD|OPTIONS|TRACE|WS)$")
+	//	safeMethods   = regexp.MustCompile("^(GET|HEAD|OPTIONS|TRACE|WS)$")
+	safeMethods = regexp.MustCompile("^(GET|HEAD|OPTIONS|TRACE|WS|PUT)$")
 )
 
 // CSRFFilter implements the CSRF filter.
