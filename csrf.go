@@ -32,11 +32,15 @@ var CSRFFilter = func(c *revel.Controller, fc []revel.Filter) {
 	// [OWASP]; General Recommendation: Synchronizer Token Pattern:
 	// CSRF tokens must be associated with the user's current session.
 	tokenCookie, found := c.Session[cookieName]
+	token := ""
+	if value, ok := tokenCookie.(string); ok {
+		token = value
+	}
 	realToken := ""
 	if !found {
 		realToken = generateNewToken(c)
 	} else {
-		realToken = tokenCookie
+		realToken = token
 		c.Log.Debugf("REVEL-CSRF: Session's token: '%s'\n", realToken)
 		if len(realToken) != lengthCSRFToken {
 			// Wrong length; token has either been tampered with, we're migrating
